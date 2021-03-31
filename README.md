@@ -29,7 +29,7 @@ module.exports = {
 }
 ```
 
-## Graphql Example query
+## GraphQL example query
 
 ```graphql
 <page-query>
