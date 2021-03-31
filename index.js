@@ -74,12 +74,21 @@ class WordPressSource {
         this.langActive = opts.addLanguage.length > 0 ? true : false;
         this.clientLangBase = [];
         
-        if(this.langActive){
-          for(let lang of opts.addLanguage){
+         if(this.langActive){
+          // single language 
+          if(typeof opts.addLanguage == "string"){
             let createBase = axios.create({
-              baseURL: `${baseUrl}/${lang}/${opts.apiBase}`,
+              baseURL: `${baseUrl}/${opts.addLanguage}/${opts.apiBase}`,
             });
-            this.clientLangBase.push({baseData: createBase, langCode: "_" + lang})
+            this.clientLangBase.push({baseData: createBase, langCode: "_" + opts.addLanguage})
+          } else {
+            // multiple languages
+            for(let lang of opts.addLanguage){
+              let createBase = axios.create({
+                baseURL: `${baseUrl}/${lang}/${opts.apiBase}`,
+              });
+              this.clientLangBase.push({baseData: createBase, langCode: "_" + lang})
+            }
           }
         }
       
